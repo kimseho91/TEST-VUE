@@ -2,6 +2,11 @@
   <table>
     <tr>
       <td>
+        <h2>{{person.name}}의 마이페이지</h2>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <legend><h3>비밀번호 </h3></legend>
       <h5>{{person.passwd}}</h5>
       <button>수정</button><br/><br/>
@@ -23,7 +28,6 @@ export default{
 	data(){
 		return {
       context : 'http://localhost:8080/',
-      name: store.state.name,
       person : store.state.person,
       sidebars: [
 				{menu:"비밀번호 수정",link:"/update"}

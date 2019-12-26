@@ -73,7 +73,7 @@ export default {
     },
     methods : {       
         join() {
-            let url = `${this.context}/cjoin`
+            let url = `${this.context}/join`
             let data = this.person
             let headers = {
                 'authorization': 'JWT fefege..',

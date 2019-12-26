@@ -1,24 +1,13 @@
 <template>
 <div id="pagewrap">
-			<div>
-				<div  v-for="header of headers" :key="header.menu">
-					<router-link :to ="header.link">{{header.menu}}</router-link>
-				</div>				
-                    <a href="#" @click="logout">LogOut</a>                  
-			</div>     
+	<router-link to ="/mypage">Mypage</router-link><br />
+	<a href="#" @click="logout">LogOut</a>                
 </div>
 </template>
 <script>
 import {store} from "../../store"
 export default { 
-	data(){
-		return {
-			headers: [
-				{menu : "Join", link: "/cJoin"},
-				{menu : "Mypage", link: "/mypage"}
-			]               
-		}
-     },
+	
   methods: {
     logout (){
               alert('로그아웃 ')

@@ -2,20 +2,11 @@
 	<div id="app">
 		<layout>
 			<template #header="header">
+				<h4>{{header.title}}</h4>
 				<component :is="whichCompo ? 'LogOutHeader' : 'LogInHeader' "></component>
 			</template>
 			<template #sidebar="sidebar">
-				<div v-switch="sidebarCheck">
-					<div v-case="'studentSidebar'">
-						<component :is="'student-sidebar'"></component>
-					</div>
-					<div v-case="'adminSidebar'">
-						<component :is="'admin-sidebar'"></component>
-					</div>
-					<div v-case="'preSidebar'">
-						<component :is="'pre-sidebar'"></component>
-					</div>
-				</div>
+				<component :is="sidebarCheck"></component>
 			</template>
 			<template #section="section">
 				<router-view></router-view>
@@ -48,10 +39,10 @@ components : {Layout, LogInHeader, LogOutHeader,
 	computed: {
     whichCompo () {
 		return store.state.loginstate
-		},
-		sidebarCheck : function () {
-			return store.state.sidebar
-		} 
+	},
+	sidebarCheck : function () {
+		return store.state.sidebar
+	}
   }
 }
 </script>

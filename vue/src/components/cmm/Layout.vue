@@ -1,7 +1,7 @@
 <template>
 	<div id="wrapper">
 		<header>
-			<slot name="header"></slot>
+			<slot name="header" :title="changeMessage"></slot>
 		</header>
 		<sidebar id="sidebar">
 			<slot name="sidebar"></slot>
@@ -16,13 +16,20 @@
 </template>
 
 <script>
+import { store } from "@/store"
 export default {
 	data() {
 		return {
                sectionTitle : '',
-			footerTitle : '푸터 :D'
+               footerTitle : '푸터 :D'
+               
 		}
-	}
+     },
+     computed: {
+          changeMessage: function () {
+               return store.state.headerMessage
+          }
+     }
 }
 </script>
 

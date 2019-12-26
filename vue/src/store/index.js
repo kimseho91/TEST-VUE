@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
   state: {
 		person : {},
 		loginstate : false,
-		sidebar : 'preSidebar'
+		sidebar : 'preSidebar',
+		headerMessage : '공통화면'
   }
 })

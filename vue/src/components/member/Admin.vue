@@ -2,6 +2,11 @@
   <table>
     <tr>
       <td>
+        <h2>{{person.name}}의 관리자 페이지</h2>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <legend><h3>비밀번호 </h3></legend>
       <h5>{{person.passwd}}</h5>
       <button>수정</button><br/><br/>
@@ -24,15 +29,7 @@ export default{
 	data(){
 		return {
       context : 'http://localhost:8080/',
-      name: store.state.name,
       person : store.state.person,
-      sidebars: [
-				{menu:"학생등록",link:"/write"},
-				{menu:"학생목록",link:"/list"},
-				{menu:"학생정보수정",link:"/update"},
-				{menu:"학생정보삭제",link:"/remove"},
-				{menu:"학생검색",link:"/search"}
-      ],
       authCheck : true
 		}
 		

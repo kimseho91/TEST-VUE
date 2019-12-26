@@ -28,8 +28,7 @@ export default {
             context : 'http://localhost:8080/',
             result : '',
             userid : '',
-            passwd : '',
-            person : {}
+            passwd : ''
 		}
     },
     methods : {
@@ -54,9 +53,11 @@ export default {
                 alert(`스토어에 저장성공 ${store.state.loginstate}`)
                     if(store.state.person.role !== 'student'){
                         store.state.sidebar = 'adminSidebar'
-                        this.$router.push({path: '/admin'})
+                        store.state.headerMessage = '관리자 화면'
+                        this.$router.push({path: '/students'})
                     }else{
                         store.state.sidebar = 'studentSidebar'
+                        store.state.headerMessage = '학생 화면'
                         this.$router.push({path: '/myPage'})
                     }
                 }else{
