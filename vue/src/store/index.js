@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-	id : '',
-	offerId : ''
+		person : {},
+		loginstate : false,
+		sidebar : 'preSidebar'
   }
 })

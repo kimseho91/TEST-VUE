@@ -2,16 +2,20 @@
 	<div id="app">
 		<layout>
 			<template #header="header">
-				<span v-for="header of headers" :key="header.menu">
-					<router-link :to="header.link">{{header.menu}}</router-link>
-				</span>
+				<component :is="whichCompo ? 'LogOutHeader' : 'LogInHeader' "></component>
 			</template>
 			<template #sidebar="sidebar">
-				<ul>
-					<li v-for="sidebar of sidebars" :key="sidebar.menu">
-					<router-link :to="sidebar.link">{{sidebar.menu}}</router-link>
-					</li>
-				</ul>
+				<div v-switch="sidebarCheck">
+					<div v-case="'studentSidebar'">
+						<component :is="'student-sidebar'"></component>
+					</div>
+					<div v-case="'adminSidebar'">
+						<component :is="'admin-sidebar'"></component>
+					</div>
+					<div v-case="'preSidebar'">
+						<component :is="'pre-sidebar'"></component>
+					</div>
+				</div>
 			</template>
 			<template #section="section">
 				<router-view></router-view>
@@ -25,23 +29,30 @@
 
 <script>
 import Layout from "@/components/cmm/Layout.vue"
+import LogInHeader from "@/components/cmm/LogInHeader.vue"
+import LogOutHeader from "@/components/cmm/LogOutHeader.vue"
+import AdminSidebar from "@/components/cmm/AdminSidebar.vue"
+import StudentSidebar from "@/components/cmm/StudentSidebar.vue"
+import PreSidebar from "@/components/cmm/PreSidebar.vue"
+import {store} from "../store"
+
 export default {
-	components : {Layout},
+components : {Layout, LogInHeader, LogOutHeader, 
+							StudentSidebar, AdminSidebar, PreSidebar},
 	data(){
 		return{
-			sidebars:[
-				{menu : "글작성", link : "/write"},
-				{menu : "글목록", link : "/list"},
-				{menu : "글수정", link : "/update"},
-				{menu : "글삭제", link : "/remove"},
-				{menu : "검색", link : "/search"}
-      ],
-      headers:[
-				{menu : "로그인", link : "/login"},
-				{menu : "회원가입", link : "/Join"}
-      ]
 		}
-	}
+	},
+	methods : {
+	},
+	computed: {
+    whichCompo () {
+		return store.state.loginstate
+		},
+		sidebarCheck : function () {
+			return store.state.sidebar
+		} 
+  }
 }
 </script>
 
