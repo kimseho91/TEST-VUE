@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.test.web.person.PersonRepository;
+
 import lombok.Data;
 
 @Data @Lazy
@@ -22,6 +25,8 @@ public class PageProxy extends Proxy{
 	private boolean existPrev, existNext;
 	private String search;
 	private final int BLOCK_SIZE = 5;
+	
+	@Autowired PersonRepository personRepository;
 	/*
 	 * @Autowired Printer p;
 	 * 
@@ -30,8 +35,8 @@ public class PageProxy extends Proxy{
 
 	
 	public void paging() {
-		/* ISupplier<String> s = ()-> articleMapper.countArticles(); */
-		/* totalCount = Integer.parseInt(s.get()); */
+		long count = personRepository.count();
+		totalCount = (int) count;
 		pageCount = (totalCount % pageSize != 0) ? (totalCount / pageSize)+1 : totalCount / pageSize;
 		startRow = (pageNum-1)*pageSize;
 		endRow = (pageNum==pageCount) ? totalCount -1 : startRow + pageSize -1;

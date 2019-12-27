@@ -9,6 +9,8 @@ export const store = new Vuex.Store({
 		person : {},
 		loginstate : false,
 		sidebar : 'preSidebar',
-		headerMessage : '공통화면'
+		headerMessage : '공통화면',
+		userid : '',
+    passwd : ''
   }
 })

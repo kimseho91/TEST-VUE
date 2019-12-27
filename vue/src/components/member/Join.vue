@@ -1,138 +1,102 @@
 <template>
-<div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
-		<h2>Sign Up</h2>
-		<p>Please fill in this form to create an account!</p>
-		<hr>
-        <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-				<input type="text" class="form-control" name="username" placeholder="Username" required="required">
-			</div>
+<div>
+  <div id="host-header">
+        <h1 align = "center">업체 회원 가입</h1>
+      </div>
+        <fieldset>
+        <legend>아이디 입력 </legend>
+        <span><input v-model="person.userid" type="text" id="hostId" name="hostId" maxlength="20" value=""></span>
+        </fieldset>
+        <fieldset>
+        <legend>패스워드 입력 </legend>
+        <input v-model="person.passwd" type="pw" id="userPw" name="hostPw" maxlength="20" autocomplete="off">
+        </fieldset>
+        <fieldset>
+        <legend>이름 입력 </legend>
+        <div><label for="hostName">이름</label></div>
+        <div><input v-model="person.name" type="text" id="hostName" name="hostName" maxlength="20" value=""></div>
+        </fieldset>
+        <fieldset>
+        <legend>생일 입력 </legend>
+        <div><label for="hostBirth">생일</label></div>
+        <div><input v-model="person.birthday" type="text" id="birthday" name="birthday" maxlength="20" value=""></div>
+        </fieldset>
+        <fieldset>
+        <legend>성별 입력 </legend>
+        <div><label for="hostgender">성별</label></div>
+        <div><input v-model="person.gender" type="text" id="gender" name="gender" maxlength="20" value=""></div>
+        </fieldset>
+        <fieldset>
+        <legend>학년 입력 </legend>
+        <div><label for="hosthak">학년</label></div>
+        <div><input v-model="person.hak" type="text" id="hak" name="hak" maxlength="20" value=""></div>
+        </fieldset>
+        <fieldset>
+        <legend>반 입력 </legend>
+        <div><label for="hostban">반</label></div>
+        <div><input v-model="person.ban" type="text" id="ban" name="ban" maxlength="20" value=""></div>
+        </fieldset>
+        <fieldset>
+        <legend>점수 입력 </legend>
+        <div><label for="hostscore">점수</label></div>
+        <div><input v-model="person.score" type="text" id="score" name="score" maxlength="20" value=""></div>
+        </fieldset>
+        <fieldset>
+        <legend>직급 입력 </legend>
+        <div><label for="hostrole">직급</label></div>
+        <div><input v-model="person.role" type="text" id="role" name="role" maxlength="20" value=""></div>
+        <br/>
+        </fieldset>
+        <div class="btnfield" style="text-align: center">
+            <button @click.prevent="join" type="submit" class="btn btn-primary btn-lg btn-block">회원가입</button>
         </div>
-        <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-				<input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
-			</div>
-        </div>
-		<div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="text" class="form-control" name="password" placeholder="Password" required="required">
-			</div>
-        </div>
-		<div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon">
-					<i class="fa fa-lock"></i>
-					<i class="fa fa-check"></i>
-				</span>
-				<input type="text" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
-			</div>
-        </div>
-        <div class="form-group">
-			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
-		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
-        </div>
-    </form>
-	<div class="text-center">Already have an account? <a href="#">Login here</a></div>
 </div>
 </template>
 <script>
+import axios from "axios"
 export default {
-
+    data() {
+        return {
+            context : 'http://localhost:8080/',
+            person:{
+                userid : '',
+                passwd : '',
+                name : '',
+                birthday : '',
+                gender : '',
+                hak : '',
+                ban : '',
+                score : '',
+                role : ''
+            }
+        }
+    },
+    methods : {       
+        join() {
+            let url = `${this.context}/join`
+            let data = this.person
+            let headers = {
+                'authorization': 'JWT fefege..',
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+            axios
+            .post(url, data, headers)
+            .then(res=>{
+                if(res.data.result === "SUCCESS"){
+                    alert(`회원가입 성공 !!`)
+                    this.$router.push({path:'/login'})
+                }else{
+                    alert(`회원가입 실패`)
+                    this.$router.push({path:'/cjoin'})
+                }
+            })
+            .catch(()=>{
+                alert('AXIOS 실패')
+            })
+        }
+    }
 }
 </script>
 <style scoped>
-body {
-  color: #fff;
-  background: #19aa8d;
-  font-family: 'Roboto', sans-serif;
-}
-.form-control, .form-control:focus, .input-group-addon {
-  border-color: #e1e1e1;
-}
-.form-control, .btn {        
-      border-radius: 3px;
-  }
-.signup-form {
-  width: 390px;
-  margin: 0 auto;
-  padding: 30px 0;
-}
-.signup-form form {
-  color: #999;
-  border-radius: 3px;
-    margin-bottom: 15px;
-      background: #fff;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-      padding: 30px;
-  }
-.signup-form h2 {
-  color: #333;
-  font-weight: bold;
-      margin-top: 0;
-  }
-.signup-form hr {
-      margin: 0 -30px 20px;
-  }
-.signup-form .form-group {
-  margin-bottom: 20px;
-}
-.signup-form label {
-  font-weight: normal;
-  font-size: 13px;
-}
-.signup-form .form-control {
-  min-height: 38px;
-  box-shadow: none !important;
-}	
-.signup-form .input-group-addon {
-  max-width: 42px;
-  text-align: center;
-}
-.signup-form input[type="checkbox"] {
-  margin-top: 2px;
-}   
-.signup-form .btn{        
-      font-size: 16px;
-      font-weight: bold;
-  background: #19aa8d;
-  border: none;
-  min-width: 140px;
-  }
-.signup-form .btn:hover, .signup-form .btn:focus {
-  background: #179b81;
-      outline: none;
-}
-.signup-form a {
-  color: #fff;	
-  text-decoration: underline;
-}
-.signup-form a:hover {
-  text-decoration: none;
-}
-.signup-form form a {
-  color: #19aa8d;
-  text-decoration: none;
-}	
-.signup-form form a:hover {
-  text-decoration: underline;
-}
-.signup-form .fa {
-  font-size: 21px;
-}
-.signup-form .fa-paper-plane {
-  font-size: 18px;
-}
-.signup-form .fa-check {
-  color: #fff;
-  left: 17px;
-  top: 18px;
-  font-size: 7px;
-  position: absolute;
-}
 </style>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 @Lazy @Data @Component
 public class PersonDTO {
+	
 	private Long id;
 	private String userid;
 	private String passwd;

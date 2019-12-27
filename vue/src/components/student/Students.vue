@@ -1,6 +1,7 @@
 <template> 
 	<div>학생 목록 
-	<table class="table"><tr>
+	<table class="table">
+	<tr>
 	<th>No.</th><th>아이디</th><th>비번</th><th>이름</th><th>생년월일</th>
 	<th>성별</th><th>학년</th><th>반</th><th>점수</th><th>역할</th>
 	</tr>

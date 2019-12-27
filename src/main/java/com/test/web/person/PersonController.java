@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,7 +64,7 @@ public class PersonController {
 		printer.accept(String.format("PASSWD: %s", param.getPasswd()));
 		printer.accept(String.format("PASSWD: %s", param.getName()));
 		printer.accept(String.format("PASSWD: %s", param.getBirthday()));
-		printer.accept(String.format("PASSWD: %s", param.getGender()));
+//		printer.accept(String.format("PASSWD: %s", param.getGender()));
 		printer.accept(String.format("PASSWD: %s", param.getHak()));
 		printer.accept(String.format("PASSWD: %s", param.getBan()));
 		printer.accept(String.format("PASSWD: %s", param.getScore()));
@@ -98,4 +99,31 @@ public class PersonController {
 		return list.stream().filter(role-> role.getRole().equals("student"));
 	}
 	
+	@GetMapping("/students/{searchWord}")
+	public Stream<PersonDTO> findSome(@PathVariable String searchWord){
+		List<PersonDTO> list = new ArrayList<>();
+		switch (searchWord) {
+		case "namesOfStudents": break;
+		case "streamToArray": break;
+		case "streamToMap": break;
+		case "theNumberOfStudents": break;
+		case "totalScore": break;
+		case "topStudent": break;
+		case "getStat": break;
+		case "nameList": break;
+		case "topByGrade": break;
+		case "partioningBy": break;
+		case "partioningCountPerGender": break;
+		case "partioningTopPerGender": break;
+		case "partioningRejectPerGender": break;
+		case "groupingByBan": break;
+		case "groupingByGrade": break;
+		case "groupingByCountByLevel": break;
+		case "groupingByHakAndBan": break;
+		case "groupingTopByHakAndBan": break;
+		case "groupingByStat": break;
+		
+		}
+		return null;
+	}
 }
