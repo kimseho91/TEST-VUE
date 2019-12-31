@@ -11,7 +11,7 @@ export default {
   data(){
 		return{
 			sidebars:[
-			{menu:"게시글 목록",link:"/articles"},
+				{menu:"게시글 목록",link:"/articles"},
 				{menu:"게시글 검색",link:"/articleFindOne"}
 			]
 		}

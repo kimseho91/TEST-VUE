@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="host-header">
-        <h1 align = "center">업체 회원 가입</h1>
+        <h1 align = "center">회원 가입</h1>
       </div>
         <fieldset>
         <legend>아이디 입력 </legend>
@@ -49,54 +49,11 @@
         </fieldset>
         <div class="btnfield" style="text-align: center">
             <button @click.prevent="join" type="submit" class="btn btn-primary btn-lg btn-block">회원가입</button>
-        </div>
+      </div>
 </div>
 </template>
 <script>
-import axios from "axios"
-export default {
-    data() {
-        return {
-            context : 'http://localhost:8080/',
-            person:{
-                userid : '',
-                passwd : '',
-                name : '',
-                birthday : '',
-                gender : '',
-                hak : '',
-                ban : '',
-                score : '',
-                role : ''
-            }
-        }
-    },
-    methods : {       
-        join() {
-            let url = `${this.context}/join`
-            let data = this.person
-            let headers = {
-                'authorization': 'JWT fefege..',
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            }
-            axios
-            .post(url, data, headers)
-            .then(res=>{
-                if(res.data.result === "SUCCESS"){
-                    alert(`회원가입 성공 !!`)
-                    this.$router.push({path:'/login'})
-                }else{
-                    alert(`회원가입 실패`)
-                    this.$router.push({path:'/cjoin'})
-                }
-            })
-            .catch(()=>{
-                alert('AXIOS 실패')
-            })
-        }
-    }
-}
+
 </script>
 <style scoped>
 </style>

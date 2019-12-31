@@ -8,17 +8,5 @@
 	</div>
 </template>
 <script>
-export default{
-	data(){
-		return {
-			sidebars : [
-                {menu:"학생목록",link:"/students"},
-                {menu:"조건별 학생검색",link:"/studentFindOne"},
-				{menu:"학생성적수정",link:"/studentEdit"},
-				{menu:"ID 학생검색",link:"/studentFindSome"}
-			]
-		}
-	}
-}
 </script>
 <style scoped></style>

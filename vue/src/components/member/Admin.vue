@@ -24,12 +24,9 @@
   </table>
 </template>
 <script>
-import {store} from "../../store"
 export default{
 	data(){
 		return {
-      context : 'http://localhost:8080/',
-      person : store.state.person,
       authCheck : true
 		}
 		

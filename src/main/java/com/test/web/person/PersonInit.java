@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
 import com.test.web.proxy.Proxy;
 
 @Component
@@ -18,6 +17,12 @@ public class PersonInit extends Proxy implements ApplicationRunner {
 		this.personRepository = personRepository;
 	}
 	
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+
+	}
+
+	/*
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		long count = personRepository.count();
@@ -61,6 +66,7 @@ public class PersonInit extends Proxy implements ApplicationRunner {
 			
 		}
 
-	}
+	}*/
 
 }
+

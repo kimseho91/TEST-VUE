@@ -25,7 +25,6 @@ import LogOutHeader from "@/components/cmm/LogOutHeader.vue"
 import AdminSidebar from "@/components/cmm/AdminSidebar.vue"
 import StudentSidebar from "@/components/cmm/StudentSidebar.vue"
 import PreSidebar from "@/components/cmm/PreSidebar.vue"
-import {store} from "../store"
 
 export default {
 components : {Layout, LogInHeader, LogOutHeader, 
@@ -38,11 +37,11 @@ components : {Layout, LogInHeader, LogOutHeader,
 	},
 	computed: {
     whichCompo () {
-		return store.state.loginstate
-	},
-	sidebarCheck : function () {
-		return store.state.sidebar
-	}
+		return this.$store.state.is_auth
+		},
+		sidebarCheck : function () {
+		return this.$store.state.sidebar
+		}
   }
 }
 </script>

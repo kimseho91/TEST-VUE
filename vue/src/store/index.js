@@ -1,16 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import common from '@/store/modules/common'
+import students from '@/store/modules/students'
+import article from '@/store/modules/article'
+import admin from '@/store/modules/admin'
 /* import axios from 'axios' */
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state: {
-		person : {},
-		loginstate : false,
-		sidebar : 'preSidebar',
-		headerMessage : '공통화면',
-		userid : '',
-    passwd : ''
-  }
+  modules : {
+		common,
+		admin,
+		students,
+		article
+	},
+	strcit : true
+
 })

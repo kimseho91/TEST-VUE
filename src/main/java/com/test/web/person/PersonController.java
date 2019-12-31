@@ -1,11 +1,9 @@
 package com.test.web.person;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +23,7 @@ public class PersonController {
 	@Autowired private PersonRepository personRepository;
 	@Autowired private Printer printer;
 	@Autowired private Person person;
+	@Autowired private PersonService service;
 	@Autowired ModelMapper modelMapper;
 	@Bean public ModelMapper modelMapper() { return new ModelMapper(); }
 
@@ -64,7 +62,6 @@ public class PersonController {
 		printer.accept(String.format("PASSWD: %s", param.getPasswd()));
 		printer.accept(String.format("PASSWD: %s", param.getName()));
 		printer.accept(String.format("PASSWD: %s", param.getBirthday()));
-//		printer.accept(String.format("PASSWD: %s", param.getGender()));
 		printer.accept(String.format("PASSWD: %s", param.getHak()));
 		printer.accept(String.format("PASSWD: %s", param.getBan()));
 		printer.accept(String.format("PASSWD: %s", param.getScore()));
@@ -88,20 +85,21 @@ public class PersonController {
 	}
 
 	@GetMapping("/students")
-	public Stream<PersonDTO> list(){
+	public Stream<Person> list(){
 		/* Iterable<Person> entites=personRepository.findByRole("student"); */
-		Iterable<Person> entites = personRepository.findAll();	
-		List<PersonDTO> list = new ArrayList<>();
+		Iterable<Person> entites = personRepository.findAll();
+		List<Person> list = new ArrayList<>();
 		for(Person p:entites) {
-			PersonDTO dto = modelMapper.map(p,PersonDTO.class);
+			Person dto = modelMapper.map(p,Person.class);
 			list.add(dto);
 		}
 		return list.stream().filter(role-> role.getRole().equals("student"));
 	}
 	
 	@GetMapping("/students/{searchWord}")
-	public Stream<PersonDTO> findSome(@PathVariable String searchWord){
-		List<PersonDTO> list = new ArrayList<>();
+	public Stream<Person> findSome(@PathVariable String searchWord){
+		printer.accept("넘어온 검색어 : " + searchWord );
+		String switchKey = "";
 		switch (searchWord) {
 		case "namesOfStudents": break;
 		case "streamToArray": break;
@@ -112,7 +110,36 @@ public class PersonController {
 		case "getStat": break;
 		case "nameList": break;
 		case "topByGrade": break;
-		case "partioningBy": break;
+		case "남학생" : case "여학생": 
+			switchKey = (searchWord == "남") ? "partioningByMale" : "partioningByFemale";
+			break;
+		case "partioningCountPerGender": break;
+		case "partioningTopPerGender": break;
+		case "partioningRejectPerGender": break;
+		case "groupingByBan": break;
+		case "groupingByGrade": break;
+		case "groupingByCountByLevel": break;
+		case "3학년목록": 
+			switchKey = "groupingByHak";
+			break;
+		case "groupingByHakAndBan": break;
+		case "groupingTopByHakAndBan": break;
+		case "groupingByStat": break;
+		
+		}
+		switch (switchKey) {
+		case "namesOfStudents": break;
+		case "streamToArray": break;
+		case "streamToMap": break;
+		case "theNumberOfStudents": break;
+		case "totalScore": break;
+		case "topStudent": break;
+		case "getStat": break;
+		case "nameList": break;
+		case "topByGrade": break;
+		case "partioningByMale" : 
+			List<Person> list = service.partioningByGender(true);
+			break;
 		case "partioningCountPerGender": break;
 		case "partioningTopPerGender": break;
 		case "partioningRejectPerGender": break;
@@ -122,6 +149,15 @@ public class PersonController {
 		case "groupingByHakAndBan": break;
 		case "groupingTopByHakAndBan": break;
 		case "groupingByStat": break;
+		case "groupingByHak": 
+			Iterable<Person> entites = personRepository.findAll();
+			List<Person> person = new ArrayList<>();
+			for(Person p:entites) {
+				Person dto = modelMapper.map(p,Person.class);
+				person.add(dto);
+			}
+			return person.stream().filter(role-> role.getRole().equals("student"));
+			
 		
 		}
 		return null;

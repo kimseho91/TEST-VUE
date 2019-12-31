@@ -18,28 +18,7 @@
   </table>
 </template>
 <script>
-import {store} from "../../store"
-export default{
-	data(){
-		return {
-      context : 'http://localhost:8080/',
-      name: store.state.name,
-      person : store.state.person,
-      sidebars: [
-				{menu:"학생등록",link:"/write"},
-				{menu:"학생목록",link:"/list"},
-				{menu:"학생정보수정",link:"/update"},
-				{menu:"학생정보삭제",link:"/remove"},
-				{menu:"학생검색",link:"/search"}
-      ],
-      authCheck : true
-		}
-		
-	},
-  methods  : {
-    
-  }
-}
+
 </script>
 <style scoped>
     .back {width: 700px; margin: 0 ;}
